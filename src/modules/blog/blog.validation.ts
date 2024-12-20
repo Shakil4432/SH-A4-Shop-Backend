@@ -2,13 +2,23 @@ import { z } from 'zod';
 
 const blogValidationSchema = z.object({
   body: z.object({
-    title: z.string(),
-    content: z.string(),
-    author: z.string(),
+    title: z.string({ required_error: 'title is required' }),
+    content: z.string({ required_error: 'content is required' }),
+    author: z.string().optional(),
     isPublished: z.boolean().default(true),
+  }),
+});
+
+const updateBlogValidationSchema = z.object({
+  body: z.object({
+    title: z.string().optional(),
+    content: z.string().optional(),
+    author: z.string().optional(),
+    isPublished: z.boolean().default(true).optional(),
   }),
 });
 
 export const BlogValidations = {
   blogValidationSchema,
+  updateBlogValidationSchema,
 };

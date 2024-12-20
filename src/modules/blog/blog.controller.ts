@@ -20,8 +20,7 @@ const createBlog = CatchAsync(async (req, res) => {
 });
 
 const getAllBlog = CatchAsync(async (req, res) => {
-  console.log(req.user);
-  const result = await BlogServices.getAllBlogFromDB();
+  const result = await BlogServices.getAllBlogsFromDB();
   sendResponse(res, {
     success: true,
     message: 'All blogs retrieved successfully',
@@ -30,7 +29,20 @@ const getAllBlog = CatchAsync(async (req, res) => {
   });
 });
 
+const updateBlog = CatchAsync(async (req, res) => {
+  const { id } = req.params;
+  const userId = req.user?.id;
+  const result = await BlogServices.updateBlogIntoDB(id, userId, req.body);
+  sendResponse(res, {
+    success: true,
+    message: 'Blog updated successfully',
+    statusCode: 200,
+    data: result,
+  });
+});
+
 export const BlogControllers = {
   createBlog,
   getAllBlog,
+  updateBlog,
 };

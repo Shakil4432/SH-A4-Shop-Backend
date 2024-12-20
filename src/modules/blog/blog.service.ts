@@ -13,11 +13,35 @@ const createBlogIntoDB = async (payload: TBlog) => {
   return result;
 };
 
-const getAllBlogFromDB = async () => {
+const getAllBlogsFromDB = async () => {
   const result = await Blog.find();
   return result;
 };
+
+const updateBlogIntoDB = async (
+  id: string,
+  userId: string,
+  payload: Partial<TBlog>,
+) => {
+  const result = await Blog.findOneAndUpdate(
+    { _id: id, author: userId },
+    payload,
+    {
+      new: true,
+      runValidators: true,
+    },
+  );
+  if (!result) {
+    throw new AppError(
+      httpStatus.NOT_FOUND,
+      'You are  not able to update this blog',
+    );
+  }
+  return result;
+};
+
 export const BlogServices = {
   createBlogIntoDB,
-  getAllBlogFromDB,
+  getAllBlogsFromDB,
+  updateBlogIntoDB,
 };

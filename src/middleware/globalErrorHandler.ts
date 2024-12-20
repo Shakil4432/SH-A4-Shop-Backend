@@ -1,5 +1,4 @@
 import { ErrorRequestHandler } from 'express';
-import { TErrorResponse } from '../modules/interface/error';
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   const statusCode = err.statusCode || 400;
