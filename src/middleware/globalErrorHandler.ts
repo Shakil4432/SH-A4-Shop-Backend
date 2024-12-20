@@ -9,9 +9,7 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     success: false,
     message: message,
     statusCode: statusCode,
-    error: {
-      details: err,
-    },
+    error: err,
     stack: err?.stack || null,
   });
 };

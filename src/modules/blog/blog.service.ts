@@ -13,6 +13,11 @@ const createBlogIntoDB = async (payload: TBlog) => {
   return result;
 };
 
+const getAllBlogFromDB = async () => {
+  const result = await Blog.find();
+  return result;
+};
 export const BlogServices = {
   createBlogIntoDB,
+  getAllBlogFromDB,
 };
