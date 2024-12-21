@@ -1,5 +1,7 @@
+import QueryBuilder from '../../builder/QueryBuilder';
 import AppError from '../error/AppError';
 import { User } from '../user/user.model';
+import { searchAbleFields } from './blog.constant';
 import { TBlog } from './blog.interface';
 import { Blog } from './blog.model';
 import httpStatus from 'http-status';
@@ -13,8 +15,13 @@ const createBlogIntoDB = async (payload: TBlog) => {
   return result;
 };
 
-const getAllBlogsFromDB = async () => {
-  const result = await Blog.find();
+const getAllBlogsFromDB = async (query: Record<string, unknown>) => {
+  const blogsQuery = new QueryBuilder(Blog.find(), query)
+    .search(searchAbleFields)
+    .filter()
+    .sort();
+
+  const result = await blogsQuery.modelQuery;
   return result;
 };
 
