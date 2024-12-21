@@ -9,7 +9,7 @@ This repository contains the backend code for a blogging platform that supports 
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-- [API Documentation](#api-documentation)
+- [API Endpoints](#api-documentation)
   - [Authentication](#authentication)
   - [Blog Management](#blog-management)
   - [Admin Actions](#admin-actions)
