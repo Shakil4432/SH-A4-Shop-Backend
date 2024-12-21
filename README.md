@@ -90,127 +90,20 @@ This repository contains the backend code for a blogging platform that supports 
 #### 1. Register User
 **POST** `/api/auth/register`
 
-Request Body:
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "securepassword"
-}
-```
-Response:
-```json
-{
-  "success": true,
-  "message": "User registered successfully",
-  "statusCode": 201,
-  "data": {
-    "_id": "string",
-    "name": "string",
-    "email": "string"
-  }
-}
-```
-
 #### 2. Login User
 **POST** `/api/auth/login`
-
-Request Body:
-```json
-{
-  "email": "john@example.com",
-  "password": "securepassword"
-}
-```
-Response:
-```json
-{
-  "success": true,
-  "message": "Login successful",
-  "statusCode": 200,
-  "data": {
-    "token": "string"
-  }
-}
-```
-
----
 
 ### Blog Management
 
 #### 1. Create Blog
 **POST** `/api/blogs`
 
-Request Header:
-```
-Authorization: Bearer <token>
-```
-Request Body:
-```json
-{
-  "title": "My First Blog",
-  "content": "This is the content of my blog."
-}
-```
-Response:
-```json
-{
-  "success": true,
-  "message": "Blog created successfully",
-  "statusCode": 201,
-  "data": {
-    "_id": "string",
-    "title": "string",
-    "content": "string",
-    "author": { "details" }
-  }
-}
-```
 
 #### 2. Update Blog
 **PATCH** `/api/blogs/:id`
 
-Request Header:
-```
-Authorization: Bearer <token>
-```
-Request Body:
-```json
-{
-  "title": "Updated Blog Title",
-  "content": "Updated content."
-}
-```
-Response:
-```json
-{
-  "success": true,
-  "message": "Blog updated successfully",
-  "statusCode": 200,
-  "data": {
-    "_id": "string",
-    "title": "string",
-    "content": "string",
-    "author": { "details" }
-  }
-}
-```
-
 #### 3. Delete Blog
 **DELETE** `/api/blogs/:id`
-
-Request Header:
-```
-Authorization: Bearer <token>
-```
-Response:
-```json
-{
-  "success": true,
-  "message": "Blog deleted successfully",
-  "statusCode": 200
-}
-```
 
 #### 4. Get All Blogs (Public)
 **GET** `/api/blogs`
@@ -221,60 +114,17 @@ Query Parameters:
 - `sortOrder`: Define sorting order
 - `filter`: Filter blogs by author ID 
 
-Response:
-```json
-{
-  "success": true,
-  "message": "Blogs fetched successfully",
-  "statusCode": 200,
-  "data": [
-    {
-      "_id": "string",
-      "title": "string",
-      "content": "string",
-      "author": { "details" }
-    }
-  ]
-}
-```
-
----
-
 ### Admin Actions
 
 #### 1. Block User
 **PATCH** `/api/admin/users/:userId/block`
 
-Request Header:
-```
-Authorization: Bearer <admin_token>
-```
-Response:
-```json
-{
-  "success": true,
-  "message": "User blocked successfully",
-  "statusCode": 200
-}
-```
+
 
 #### 2. Delete Blog
 **DELETE** `/api/admin/blogs/:id`
 
-Request Header:
-```
-Authorization: Bearer <admin_token>
-```
-Response:
-```json
-{
-  "success": true,
-  "message": "Blog deleted successfully",
-  "statusCode": 200
-}
-```
 
----
 
 
 
