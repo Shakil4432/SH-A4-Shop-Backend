@@ -287,50 +287,6 @@ Response:
 
 ---
 
-## Models
 
-### User Model
-- `name`: string
-- `email`: string
-- `password`: string
-- `role`: "admin" | "user" (default: "user")
-- `isBlocked`: boolean (default: `false`)
-- `createdAt`: Date
-- `updatedAt`: Date
 
-### Blog Model
-- `title`: string
-- `content`: string
-- `author`: ObjectId (reference to the User model)
-- `isPublished`: boolean (default: `true`)
-- `createdAt`: Date
-- `updatedAt`: Date
 
----
-
-## Bonus Section
-
-### Error Handling
-
-Consistent error responses with the following structure:
-```json
-{
-  "success": false,
-  "message": "Error message",
-  "statusCode": 400,
-  "error": { "details": "Additional error details" },
-  "stack": "error stack trace"
-}
-```
-
-**Error Types:**
-- Validation Errors
-- Authentication Errors
-- Authorization Errors
-- Internal Server Errors
-- Not Found Errors
-
----
-
-### License
-This project is licensed under the MIT License. Feel free to use and contribute!
