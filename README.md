@@ -216,11 +216,10 @@ Response:
 **GET** `/api/blogs`
 
 Query Parameters:
-- `search`: Search blogs by title or content (e.g., `search=blogtitle`).
-- `sortBy`: Sort blogs by fields like `createdAt` or `title` (e.g., `sortBy=createdAt`).
-- `sortOrder`: Define sorting order: `asc` or `desc` (e.g., `sortOrder=desc`).
-- `filter`: Filter blogs by author ID (e.g., `author=authorId`).
-
+- `search`: Search blogs by title or content 
+- `sortBy`: Sort blogs by fields 
+- `sortOrder`: Define sorting order
+- `filter`: Filter blogs by author ID 
 Example Request URL:
 ```
 /api/blogs?search=technology&sortBy=createdAt&sortOrder=desc&filter=60b8f42f9c2a3c9b7cbd4f18
