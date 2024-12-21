@@ -13,13 +13,7 @@ This repository contains the backend code for a blogging platform that supports 
   - [Authentication](#authentication)
   - [Blog Management](#blog-management)
   - [Admin Actions](#admin-actions)
-- [Models](#models)
-  - [User Model](#user-model)
-  - [Blog Model](#blog-model)
-- [Bonus Section](#bonus-section)
-  - [Error Handling](#error-handling)
 
----
 
 ## Features
 
