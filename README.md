@@ -220,10 +220,6 @@ Query Parameters:
 - `sortBy`: Sort blogs by fields 
 - `sortOrder`: Define sorting order
 - `filter`: Filter blogs by author ID 
-Example Request URL:
-```
-/api/blogs?search=technology&sortBy=createdAt&sortOrder=desc&filter=60b8f42f9c2a3c9b7cbd4f18
-```
 
 Response:
 ```json
