@@ -1,16 +1,13 @@
+import mongoose, { Mongoose, ObjectId } from 'mongoose';
 import QueryBuilder from '../../builder/QueryBuilder';
 import AppError from '../error/AppError';
-import { User } from '../user/user.model';
 import { searchAbleFields } from './blog.constant';
 import { TBlog } from './blog.interface';
 import { Blog } from './blog.model';
 import httpStatus from 'http-status';
 
-const createBlogIntoDB = async (payload: TBlog) => {
-  const isAuthorExist = await User.findById(payload?.author);
-  if (!isAuthorExist) {
-    throw new AppError(httpStatus.BAD_REQUEST, 'Author not found');
-  }
+const createBlogIntoDB = async (userId: string, payload: TBlog) => {
+  payload.author = new mongoose.Types.ObjectId(userId);
   const result = await Blog.create(payload);
   return result;
 };

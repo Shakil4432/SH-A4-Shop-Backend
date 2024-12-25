@@ -4,8 +4,9 @@ import { sendResponse } from '../utils/sendResponse';
 import { BlogServices } from './blog.service';
 
 const createBlog = CatchAsync(async (req, res) => {
-  const result = await BlogServices.createBlogIntoDB(req.body);
-  const authorData = await User.findById(req.body.author);
+  const id = req.user?.id;
+  const result = await BlogServices.createBlogIntoDB(id, req.body);
+  const authorData = await User.findById(id);
   sendResponse(res, {
     success: true,
     message: 'Blog created successfully',
