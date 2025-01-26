@@ -1,5 +1,5 @@
 import { FilterQuery, Query } from 'mongoose';
-import { excludingSearchFields } from '../modules/blog/blog.constant';
+import { excludingSearchFields } from '../modules/products/product.constant';
 class QueryBuilder<T> {
   public modelQuery: Query<T[], T>;
   public query: Record<string, unknown>;

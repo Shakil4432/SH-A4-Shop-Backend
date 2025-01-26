@@ -12,10 +12,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
     const token = req.headers.authorization?.split(' ')[1];
 
     if (!token) {
-      throw new AppError(
-        httpStatus.FORBIDDEN,
-        'Authorization token missing or malformed',
-      );
+      throw new AppError(httpStatus.FORBIDDEN, 'You are not authorized');
     }
 
     const decoded = jwt.verify(
@@ -34,10 +31,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
     }
 
     if (requiredRoles.length && !requiredRoles.includes(user.role)) {
-      throw new AppError(
-        httpStatus.FORBIDDEN,
-        'You do not have permission to access this resource',
-      );
+      throw new AppError(httpStatus.FORBIDDEN, 'You do not have permission ');
     }
 
     req.user = { email: user.email, role: user.role, id: user._id };

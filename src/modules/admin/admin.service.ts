@@ -1,4 +1,4 @@
-import { Blog } from '../blog/blog.model';
+import { Blog } from '../products/product.model';
 import AppError from '../error/AppError';
 import { User } from '../user/user.model';
 import httpStatus from 'http-status';

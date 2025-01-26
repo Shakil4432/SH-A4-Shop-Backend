@@ -7,6 +7,7 @@ import config from '../../config';
 
 const loginUser = async (payload: TLoginUser) => {
   const user = await User.isUserExist(payload?.email);
+
   if (!user) {
     throw new AppError(httpStatus.BAD_REQUEST, 'User not found');
   }
