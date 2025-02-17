@@ -6,7 +6,7 @@ import validateRequest from '../../middleware/validateRequest';
 import { ProductValidations } from './product.validation';
 const router = express.Router();
 router.post(
-  '/create-product',
+  '/create-book',
   auth(USER_ROLE.admin),
   validateRequest(ProductValidations.productValidationSchema),
   ProductControllers.createProduct,

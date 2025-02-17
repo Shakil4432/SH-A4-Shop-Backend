@@ -7,4 +7,5 @@ export default {
   port: process.env.PORT,
   bcrypt_salt_rounds: process.env.BCRYPT_SALT_ROUNDS,
   jwt_secret_key: process.env.JWT_SECRET_KEY,
+  jwt_refresh_key: process.env.JWT_REFRESH_KEY,
 };

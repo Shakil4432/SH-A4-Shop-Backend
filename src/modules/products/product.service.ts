@@ -42,6 +42,7 @@ const updateProductIntoDB = async (
   return result;
 };
 
+
 export const ProductServices = {
   createProductIntoDB,
   getAllProductsFromDB,

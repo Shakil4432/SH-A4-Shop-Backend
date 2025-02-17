@@ -8,7 +8,7 @@ const createProduct = CatchAsync(async (req, res) => {
 
   sendResponse(res, {
     success: true,
-    message: 'Product created successfully',
+    message: 'Book created successfully',
     statusCode: 201,
     data: result,
   });
