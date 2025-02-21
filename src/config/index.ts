@@ -8,4 +8,6 @@ export default {
   bcrypt_salt_rounds: process.env.BCRYPT_SALT_ROUNDS,
   jwt_secret_key: process.env.JWT_SECRET_KEY,
   jwt_refresh_key: process.env.JWT_REFRESH_KEY,
+  cloudinary_api_key :process.env.Cloudinary_API_KEY,
+  cloudinary_api_secret: process.env.Cloudinary_API_SECRET
 };

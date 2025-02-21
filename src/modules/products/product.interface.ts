@@ -4,4 +4,5 @@ export type TProduct = {
   price: number;
   model: string;
   stock: number;
+  image:string;
 };

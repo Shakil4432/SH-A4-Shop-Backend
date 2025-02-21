@@ -7,6 +7,7 @@ const productValidationSchema = z.object({
     price: z.number({ required_error: 'price is required' }),
     model: z.string({ required_error: 'model is required' }),
     stock: z.number().default(0),
+   
   }),
 });
 

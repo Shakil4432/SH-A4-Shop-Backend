@@ -4,8 +4,9 @@ import { ProductServices } from './product.service';
 
 const createProduct = CatchAsync(async (req, res) => {
   const id = req.user?.id;
-  const result = await ProductServices.createProductIntoDB(req.body);
-
+  const result = await ProductServices.createProductIntoDB(req.file,req.body);
+ console.log(req.file)
+ console.log(req.body)
   sendResponse(res, {
     success: true,
     message: 'Book created successfully',

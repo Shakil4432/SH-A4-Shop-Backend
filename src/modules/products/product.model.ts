@@ -8,6 +8,7 @@ export const productSchema = new Schema<TProduct>(
     price: { type: Number, required: true },
     model: { type: String, required: true },
     stock: { type: Number, default: 0 },
+    image:{type:String}
   },
   { timestamps: true },
 );
