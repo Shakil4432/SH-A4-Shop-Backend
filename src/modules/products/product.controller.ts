@@ -16,16 +16,22 @@ const createProduct = CatchAsync(async (req, res) => {
 });
 
 const getAllProduct = CatchAsync(async (req, res) => {
-  const query = req.query;
-
-  const result = await ProductServices.getAllProductsFromDB(query);
-  sendResponse(res, {
-    success: true,
-    message: 'All Products retrieved successfully',
-    statusCode: 200,
-    data: result,
-  });
+  console.log('Request received:', req.query);
+  try {
+    const result = await ProductServices.getAllProductsFromDB(req.query);
+    console.log('Query result:', result);
+    sendResponse(res, {
+      success: true,
+      message: 'All Products retrieved successfully',
+      statusCode: 200,
+      data: result,
+    });
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
 });
+
 
 const updateProduct = CatchAsync(async (req, res) => {
   const { id } = req.params;

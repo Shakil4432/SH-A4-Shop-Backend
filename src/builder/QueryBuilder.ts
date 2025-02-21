@@ -1,29 +1,34 @@
 import { FilterQuery, Query } from 'mongoose';
-import { excludingSearchFields } from '../modules/products/product.constant';
+
+
 class QueryBuilder<T> {
   public modelQuery: Query<T[], T>;
   public query: Record<string, unknown>;
+
   constructor(modelQuery: Query<T[], T>, query: Record<string, unknown>) {
     this.modelQuery = modelQuery;
     this.query = query;
   }
 
-  search(searchAbleField: string[]) {
-    const search = this.query?.search || '';
+  search(searchAbleFields: string[]) {
+    const search = this.query?.search as string;
     if (search) {
-      this.modelQuery = this.modelQuery.find({
-        $or: searchAbleField.map((field) => ({
+      this.modelQuery = this.modelQuery.where({
+        $or: searchAbleFields.map((field) => ({
           [field]: { $regex: search, $options: 'i' },
         })),
       } as FilterQuery<T>);
     }
     return this;
   }
+  
+
 
   filter() {
     const queryObj = { ...this.query };
-    excludingSearchFields.forEach((el) => delete queryObj[el]);
-    this.modelQuery = this.modelQuery.find(queryObj as FilterQuery<T>);
+    const excludeFields = ['search', 'sort', 'limit', 'page', 'fields'];
+    excludeFields.forEach((el) => delete queryObj[el]);
+    this.modelQuery = this.modelQuery.where(queryObj as FilterQuery<T>);
     return this;
   }
 
@@ -32,6 +37,38 @@ class QueryBuilder<T> {
     const sortOrder = this.query?.sortOrder === 'desc' ? -1 : 1;
     this.modelQuery = this.modelQuery.sort({ [sortBy]: sortOrder });
     return this;
+  }
+
+  paginate() {
+    const page = Number(this.query?.page) || 1;
+    const limit = Number(this.query?.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    
+    this.modelQuery = this.modelQuery.skip(skip).limit(limit);
+    return this;
+  }
+
+  fields() {
+    const fields =
+      (this?.query?.fields as string)?.split(',')?.join(' ') || '-__v';
+
+    this.modelQuery = this.modelQuery.select(fields);
+    return this;
+  }
+  async countTotal() {
+    const totalQueries = this.modelQuery.getFilter();
+    const total = await this.modelQuery.model.countDocuments(totalQueries);
+    const page = Number(this?.query?.page) || 1;
+    const limit = Number(this?.query?.limit) || 10;
+    const totalPage = Math.ceil(total / limit);
+
+    return {
+      page,
+      limit,
+      total,
+      totalPage,
+    };
   }
 }
 

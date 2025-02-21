@@ -24,10 +24,16 @@ const getAllProductsFromDB = async (query: Record<string, unknown>) => {
   const ProductsQuery = new QueryBuilder(Product.find(), query)
     .search(searchAbleFields)
     .filter()
-    .sort();
-
+    .sort()
+    .paginate()
+    .fields();
+  const meta = await ProductsQuery.countTotal();
   const result = await ProductsQuery.modelQuery;
-  return result;
+
+  return {
+    meta,
+    result,
+  };
 };
 
 const updateProductIntoDB = async (
