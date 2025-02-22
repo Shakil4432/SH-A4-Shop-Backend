@@ -36,6 +36,11 @@ const getAllProductsFromDB = async (query: Record<string, unknown>) => {
   };
 };
 
+const getSingleProductFromDB = async (id: string) => {
+  const result = await Product.findById({ _id: id });
+  return result;
+};
+
 const updateProductIntoDB = async (
   id: string,
   userId: string,
@@ -59,8 +64,23 @@ const updateProductIntoDB = async (
   return result;
 };
 
+const deleteProductFromDB = async (id: string) => {
+  const result = await Product.findOneAndDelete({ _id: id});
+
+  if (!result) {
+    throw new AppError(
+      httpStatus.NOT_FOUND,
+      'You are not able to delete this Product'
+    );
+  }
+
+  return result
+};
+
 export const ProductServices = {
   createProductIntoDB,
   getAllProductsFromDB,
+  getSingleProductFromDB,
   updateProductIntoDB,
+  deleteProductFromDB
 };

@@ -10,6 +10,12 @@ router.post(
 );
 
 router.post(
+  '/register',
+  validateRequest(AuthValidations.registrationUserValidation),
+  AuthControllers.registrationUser,
+);
+
+router.post(
   '/refresh-token',
   validateRequest(AuthValidations.refreshTokenValidationSchema),
   AuthControllers.refreshToken,

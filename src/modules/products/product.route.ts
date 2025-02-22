@@ -19,14 +19,24 @@ router.post(
 );
 router.get(
   '/',
-  // auth(USER_ROLE.admin, USER_ROLE.user),
   ProductControllers.getAllProduct,
+);
+
+router.get(
+  '/:id',
+  ProductControllers.getSingleProduct,
 );
 
 router.patch(
   '/:id',
-  auth(USER_ROLE.user),
+  auth(USER_ROLE.admin),
   validateRequest(ProductValidations.updateProductValidationSchema),
   ProductControllers.updateProduct,
+);
+
+router.delete(
+  '/:id',
+  auth(USER_ROLE.admin),
+  ProductControllers.deleteProduct,
 );
 export const ProductRoutes = router;
