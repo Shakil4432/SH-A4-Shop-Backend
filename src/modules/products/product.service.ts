@@ -43,17 +43,13 @@ const getSingleProductFromDB = async (id: string) => {
 
 const updateProductIntoDB = async (
   id: string,
-  userId: string,
+
   payload: Partial<TProduct>,
 ) => {
-  const result = await Product.findOneAndUpdate(
-    { _id: id, author: userId },
-    payload,
-    {
-      new: true,
-      runValidators: true,
-    },
-  );
+  const result = await Product.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+    runValidators: true,
+  });
 
   if (!result) {
     throw new AppError(
@@ -65,16 +61,16 @@ const updateProductIntoDB = async (
 };
 
 const deleteProductFromDB = async (id: string) => {
-  const result = await Product.findOneAndDelete({ _id: id});
+  const result = await Product.findOneAndDelete({ _id: id });
 
   if (!result) {
     throw new AppError(
       httpStatus.NOT_FOUND,
-      'You are not able to delete this Product'
+      'You are not able to delete this Product',
     );
   }
 
-  return result
+  return result;
 };
 
 export const ProductServices = {
@@ -82,5 +78,5 @@ export const ProductServices = {
   getAllProductsFromDB,
   getSingleProductFromDB,
   updateProductIntoDB,
-  deleteProductFromDB
+  deleteProductFromDB,
 };

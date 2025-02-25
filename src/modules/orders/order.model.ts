@@ -1,20 +1,33 @@
 import { model, Schema } from 'mongoose';
-import { TOrders } from './order.interface';
-import { productSchema } from '../products/product.model';
+import { TCart, TCartItem } from '../cart/cart.interface';
+import { TOrders, TProductOrder } from './order.interface';
 
-const orderSchema = new Schema<TOrders>(
+const OrderItemSchema = new Schema<TProductOrder>({
+  productId: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
+  quantity: { type: Number, required: true },
+});
+
+const OrderSchema = new Schema<TOrders>(
   {
-    userId: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
-    products: { type: [productSchema], required: true },
-    totalPrice: { type: Number, required: true },
+    userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    products: [OrderItemSchema],
+    totalPrice: { type: Number, default: 0 },
+    transaction: {
+      id: String,
+      transactionStatus: String,
+      bank_status: String,
+      sp_code: String,
+      sp_message: String,
+      method: String,
+      date_time: String,
+    },
     status: {
       type: String,
-      enum: ['Pending', 'Shipping'],
-      default: 'Pending',
-      required: true,
+      enum: ['pending', 'shipped', 'paid', 'completed', 'cancelld'],
+      default: 'pending',
     },
   },
   { timestamps: true },
 );
 
-export const Order = model<TOrders>('Order', orderSchema);
+export const Order = model<TOrders>('Order', OrderSchema);

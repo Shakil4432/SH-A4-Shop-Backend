@@ -8,10 +8,18 @@ import { OrderValidations } from './order.validation';
 
 const router = express.Router();
 router.post(
-  '/create-order',
+  '/',
   auth(USER_ROLE.user, USER_ROLE.admin),
   validateRequest(OrderValidations.OrderValidationSchema),
   OrderControllers.createOrder,
 );
+router.get(
+  '/verify',
+  auth(USER_ROLE.user, USER_ROLE.admin),
+  
+  OrderControllers.verifyPayment,
+);
+
+router.get("/",OrderControllers.getOrders)
 
 export const OrderRoutes = router;

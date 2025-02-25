@@ -36,8 +36,7 @@ const getSingleProduct = CatchAsync(async (req, res) => {
 
 const updateProduct = CatchAsync(async (req, res) => {
   const { id } = req.params;
-  const userId = req.user?.id;
-  const result = await ProductServices.updateProductIntoDB(id, userId, req.body);
+  const result = await ProductServices.updateProductIntoDB(id,  req.body);
   sendResponse(res, {
     success: true,
     message: 'Product updated successfully',

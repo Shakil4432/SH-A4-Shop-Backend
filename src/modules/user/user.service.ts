@@ -1,13 +1,19 @@
-import { TUser } from './user.interface';
+
 import { User } from './user.model';
 
 
 
-const getAllUsers = async () => {
+const getAllUsersFromDB = async () => {
   const result = await User.find();
   return result;
 };
 
+const getSingleUserFromDB = async(email:string)=>{
+  const result = await User.findOne({email})
+  return result
+}
+
 export const UserServices = {
-  getAllUsers,
+  getAllUsersFromDB,
+  getSingleUserFromDB,
 };

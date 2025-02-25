@@ -1,9 +1,22 @@
 import { Types } from 'mongoose';
-import { TProduct } from '../products/product.interface';
+
+export type TProductOrder = {
+  productId: Types.ObjectId;
+  quantity: number;
+};
 
 export type TOrders = {
   userId: Types.ObjectId;
-  products: TProduct[];
+  products: TProductOrder[];
   totalPrice: number;
-  status: 'Pending' | 'Shipping';
+  transaction: {
+    id: string;
+    transactionStatus: string;
+    bank_status: string;
+    sp_code: string;
+    sp_message: string;
+    method: string;
+    date_time: string;
+  };
+  status?: 'pending' | 'shipped' | 'paid' | 'completed' | 'cancelld';
 };

@@ -1,22 +1,21 @@
-import { Types } from 'mongoose';
 import { z } from 'zod';
+import { Types } from 'mongoose';
 
-const OrderSchema = z.object({
+const CartItemSchema = z.object({
   productId: z.string().refine((id) => Types.ObjectId.isValid(id), {
     message: 'Invalid productId format',
   }),
   quantity: z.number().min(1, { message: 'Quantity must be at least 1' }),
 });
 
-const OrderValidationSchema = z.object({
+const CartSchema = z.object({
   body: z.object({
-    products: z
-      .array(OrderSchema)
+    items: z
+      .array(CartItemSchema)
       .min(1, { message: 'At least one item is required' }),
   }),
 });
 
-
-export const OrderValidations = {
-  OrderValidationSchema,
+export const CartValidations = {
+  CartSchema,
 };

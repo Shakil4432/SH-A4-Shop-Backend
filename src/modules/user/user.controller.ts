@@ -6,7 +6,7 @@ import httpStatus from 'http-status';
 
 
 const getAllUsers = CatchAsync(async (req, res) => {
-  const result = await UserServices.getAllUsers();
+  const result = await UserServices.getAllUsersFromDB();
   sendResponse(res, {
     success: true,
     message: 'All users retrieved successfully',
@@ -15,7 +15,19 @@ const getAllUsers = CatchAsync(async (req, res) => {
   });
 });
 
+const getSingleUser = CatchAsync(async (req, res) => {
+  console.log(req.params)
+  const email = req.params.email
+  const result = await UserServices.getSingleUserFromDB(email);
+  sendResponse(res, {
+    success: true,
+    message: 'Single user retrieved successfully',
+    statusCode: httpStatus.OK,
+    data: result,
+  });
+});
+
 export const UserControllers = {
-  
+  getSingleUser,
   getAllUsers,
 };
