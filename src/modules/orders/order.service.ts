@@ -7,7 +7,7 @@ import { Product } from "../products/product.model";
 import { orderUtils } from "./order.utils";
 
 const createOrderIntoDB = async (payload:  { products: { productId: string; quantity: number }[] }, userId: string,client_ip:string ) => {
-  console.log("User ID:", userId);
+ 
 
   const isUserExist = await User.findById(userId);
   if (!isUserExist) {
@@ -66,7 +66,7 @@ const createOrderIntoDB = async (payload:  { products: { productId: string; quan
   
 
   const payment = await orderUtils.makePaymentAsync(shurjopayPayload);
-  console.log(payment)
+  
 
   if (payment?.transactionStatus) {
     const result = await Order.updateOne({
@@ -111,8 +111,11 @@ const verifyPayment = async (order_id: string) => {
   return verifiedPayment;
 };
 
-const getOrders = async () => {
-  const data = await Order.find();
+const getOrders = async (email:string) => {
+  const user  = await  User.findOne({email})
+  const userId = user?._id
+ 
+  const data = await Order.find({userId:userId});
   return data;
 };
 

@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { TCart, TCartItem } from '../cart/cart.interface';
+
 import { TOrders, TProductOrder } from './order.interface';
 
 const OrderItemSchema = new Schema<TProductOrder>({

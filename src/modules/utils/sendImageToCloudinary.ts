@@ -3,7 +3,7 @@ import config from '../../config';
 import multer from 'multer';
 import fs from 'fs';
 
-// Configuration
+
 cloudinary.config({
   cloud_name: 'daumdhnzd',
   api_key: config.cloudinary_api_key,
@@ -23,8 +23,8 @@ export const sendImageTocloudinary = (imageName: string, path: string) => {
         }
         resolve(result);
         fs.unlink(path, function (err) {
-          if (err) return console.log(err);
-          console.log('file deleted successfully');
+          if (err) return err
+         
         });
       },
     );

@@ -20,6 +20,6 @@ router.get(
   OrderControllers.verifyPayment,
 );
 
-router.get("/",OrderControllers.getOrders)
+router.get("/:email",OrderControllers.getOrders)
 
 export const OrderRoutes = router;

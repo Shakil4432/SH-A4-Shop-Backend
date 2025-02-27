@@ -6,7 +6,8 @@ import httpStatus from 'http-status';
 
 
 const getAllUsers = CatchAsync(async (req, res) => {
-  const result = await UserServices.getAllUsersFromDB();
+ 
+  const result = await UserServices.getAllUsersFromDB(req.query);
   sendResponse(res, {
     success: true,
     message: 'All users retrieved successfully',
@@ -27,7 +28,22 @@ const getSingleUser = CatchAsync(async (req, res) => {
   });
 });
 
+const deleteUser = CatchAsync(async (req, res) => {
+ 
+  const id = req.params.id
+ 
+  
+  const result = await UserServices.deleteUserFormDB(id);
+  sendResponse(res, {
+    success: true,
+    message: 'user deleted successfully',
+    statusCode: httpStatus.OK,
+    data: result,
+  });
+});
+
 export const UserControllers = {
   getSingleUser,
   getAllUsers,
+  deleteUser
 };

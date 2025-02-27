@@ -7,7 +7,7 @@ import { ProductRoutes } from './modules/products/product.route';
 import { AdminRoutes } from './modules/admin/admin.route';
 import { OrderRoutes } from './modules/orders/order.route';
 import globalErrorHandler from './middleware/globalErrorHandler';
-import { CartRoutes } from './modules/cart/cart.route';
+
 
 const app: Application = express();
 
@@ -23,7 +23,7 @@ app.use('/api/auth', AuthRoutes);
 app.use('/api/products', ProductRoutes);
 app.use('/api/admin', AdminRoutes);
 app.use('/api/order', OrderRoutes);
-app.use("/api/cart", CartRoutes)
+
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Book Shop server running');
