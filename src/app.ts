@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(cors({ origin: 'https://book-shop-frontend-six.vercel.app', credentials: true }));
 
 // application routes
-app.use('/api/user', UserRoutes);
+app.use('/api/users', UserRoutes);
 app.use('/api/auth', AuthRoutes);
 app.use('/api/products', ProductRoutes);
 app.use('/api/admin', AdminRoutes);
