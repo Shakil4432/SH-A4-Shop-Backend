@@ -9,23 +9,17 @@ const router = express.Router();
 router.post(
   '/create-book',
   auth(USER_ROLE.admin),
-  upload.single("file"),
-  (req:Request,res:Response,next:NextFunction)=>{
-    req.body = JSON.parse(req.body.data)
-    next()
+  upload.single('file'),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = JSON.parse(req.body.data);
+    next();
   },
   validateRequest(ProductValidations.productValidationSchema),
   ProductControllers.createProduct,
 );
-router.get(
-  '/',
-  ProductControllers.getAllProduct,
-);
+router.get('/', ProductControllers.getAllProduct);
 
-router.get(
-  '/:id',
-  ProductControllers.getSingleProduct,
-);
+router.get('/:id', ProductControllers.getSingleProduct);
 
 router.patch(
   '/:id',
@@ -34,9 +28,5 @@ router.patch(
   ProductControllers.updateProduct,
 );
 
-router.delete(
-  '/:id',
-  auth(USER_ROLE.admin),
-  ProductControllers.deleteProduct,
-);
+router.delete('/:id', auth(USER_ROLE.admin), ProductControllers.deleteProduct);
 export const ProductRoutes = router;
