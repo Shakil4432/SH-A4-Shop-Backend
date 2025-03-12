@@ -3,7 +3,6 @@ import config from '../../config';
 import multer from 'multer';
 import fs from 'fs';
 
-
 cloudinary.config({
   cloud_name: 'daumdhnzd',
   api_key: config.cloudinary_api_key,
@@ -23,8 +22,7 @@ export const sendImageTocloudinary = (imageName: string, path: string) => {
         }
         resolve(result);
         fs.unlink(path, function (err) {
-          if (err) return err
-         
+          if (err) return err;
         });
       },
     );
