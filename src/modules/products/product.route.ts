@@ -7,13 +7,8 @@ import { ProductValidations } from './product.validation';
 import { upload } from '../utils/sendImageToCloudinary';
 const router = express.Router();
 router.post(
-  '/create-book',
+  '/create-product',
   auth(USER_ROLE.admin),
-  upload.single('file'),
-  (req: Request, res: Response, next: NextFunction) => {
-    req.body = JSON.parse(req.body.data);
-    next();
-  },
   validateRequest(ProductValidations.productValidationSchema),
   ProductControllers.createProduct,
 );

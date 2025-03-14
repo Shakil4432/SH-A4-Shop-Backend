@@ -3,11 +3,10 @@ import { sendResponse } from '../utils/sendResponse';
 import { ProductServices } from './product.service';
 
 const createProduct = CatchAsync(async (req, res) => {
- 
-  const result = await ProductServices.createProductIntoDB(req.file, req.body);
+  const result = await ProductServices.createProductIntoDB(req.body);
   sendResponse(res, {
     success: true,
-    message: 'Book created successfully',
+    message: 'Product created successfully',
     statusCode: 201,
     data: result,
   });
@@ -36,7 +35,7 @@ const getSingleProduct = CatchAsync(async (req, res) => {
 
 const updateProduct = CatchAsync(async (req, res) => {
   const { id } = req.params;
-  const result = await ProductServices.updateProductIntoDB(id,  req.body);
+  const result = await ProductServices.updateProductIntoDB(id, req.body);
   sendResponse(res, {
     success: true,
     message: 'Product updated successfully',

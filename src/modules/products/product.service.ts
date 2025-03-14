@@ -1,21 +1,11 @@
 import QueryBuilder from '../../builder/QueryBuilder';
 import AppError from '../error/AppError';
-import { sendImageTocloudinary } from '../utils/sendImageToCloudinary';
 import { searchAbleFields } from './product.constant';
 import { TProduct } from './product.interface';
 import { Product } from './product.model';
 import httpStatus from 'http-status';
 
-const createProductIntoDB = async (file: any, payload: TProduct) => {
-  if (!file?.path) {
-    throw new AppError(httpStatus.BAD_REQUEST, 'File is required');
-  }
-
-  const imageName = payload.name;
-  const { secure_url }: any = await sendImageTocloudinary(imageName, file.path);
-
-  payload.image = secure_url;
-
+const createProductIntoDB = async (payload: TProduct) => {
   const result = await Product.create(payload);
   return result;
 };
